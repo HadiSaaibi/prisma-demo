@@ -25,7 +25,7 @@ docker run --name prisma-demo-postgres \
  -d postgres:18
 ```
 
-Next, copy the `.env.example` file to `.env`:
+Next, copy the `.env.sample` file to `.env`:
 
 ```bash
 cp .env.sample .env
@@ -66,7 +66,7 @@ npx prisma migrate dev --name your_migration_name
 Open the Prisma Studio to visually browse and manage your database:
 
 ```bash
-npx prisma studio --config ./prisma.config.ts
+npx prisma studio
 ```
 
 Made a mistake in one of your migrations? No problem, delete the migration folder and reset the database with:
@@ -86,3 +86,20 @@ npx prisma migrate reset
 **Extra Bonus Points** Create a DB `VIEW` for popular books books with an average rating above 4. _Hint:_ you can make use of `npx prisma migrate dev --create-only`
 
 **NOTE:** Make sure to add seeding using [faker.js](https://fakerjs.dev/) for any new models you create.
+
+### A note on using AI agents
+
+This exercise is meant to deepen your understanding of Prisma, schema design, and migrations. If you plan to use an AI agent, don't ask it to generate the full solution. Instead, guide it with something like:
+
+```
+Act as a mentor. Do not give me the full solution.
+Help me step by step with hints, explanations, and guiding questions so I can implement:
+- The Publisher model and its relationship to Book
+- The Genre many-to-many relationship
+- Timestamps on all models
+- (Bonus) A review system and a DB VIEW for popular books
+
+Focus on helping me understand, not completing the task for me.
+```
+
+The goal is to understand what you're doing, not just finish the assignment.
