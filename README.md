@@ -75,6 +75,12 @@ Made a mistake in one of your migrations? No problem, delete the migration folde
 npx prisma migrate reset
 ```
 
+### How to submit your work
+
+1. Fork this repo to your own GitHub account.
+2. Make your changes there.
+3. Open a Pull Request against this repo.
+
 ### What you need to do
 
 1. Add a Publisher model, a many-to-one relationship between Publisher and Book.
