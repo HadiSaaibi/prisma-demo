@@ -34,6 +34,8 @@ model Book {
 
   genres BookGenre[]
 
+  reviews UserReview[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -70,4 +72,33 @@ model BookGenre {
   isPrimary  Boolean  @default(false)
 
   @@id([bookId, genreId])
+}
+
+// User-Review  
+
+model User {
+  id      String   @id @default(uuid())
+  name    String
+  email   String   @unique
+  reviews UserReview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Review is essentially a junction table between User and Book similar to BookGenre
+
+model UserReview {
+  id      String  @id @default(uuid())
+  rating  Int
+  comment String?
+
+  bookId  String
+  book    Book   @relation(fields: [bookId], references: [id])
+
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
