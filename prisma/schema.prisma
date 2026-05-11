@@ -18,6 +18,9 @@ model Author {
   email String @unique
   name  String
   books Book[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Book {
@@ -25,4 +28,46 @@ model Book {
   title    String
   authorId String
   author   Author @relation(fields: [authorId], references: [id])
+
+  publisherId String
+  publisher   Publisher @relation(fields: [publisherId], references: [id])
+
+  genres BookGenre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Publisher {
+  id       String @id @default(uuid())
+  name     String
+
+  books Book[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Genre {
+  id       String @id @default(uuid())
+  type     String
+
+  books BookGenre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// junction table with fields in common
+model BookGenre {
+  bookId  String
+  book    Book   @relation(fields: [bookId], references: [id])
+
+  genreId String
+  genre   Genre  @relation(fields: [genreId], references: [id])
+
+  assignedAt DateTime @default(now())
+  isPrimary  Boolean  @default(false)
+
+  @@id([bookId, genreId])
 }
